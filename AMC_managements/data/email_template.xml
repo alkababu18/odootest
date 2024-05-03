@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="email_template_contract_expiry_reminder" model="mail.template">
+            <field name="name">Contract Expiry Reminder</field>
+            <field name="email_from">${user.email_formatted | safe}</field>
+            <field name="subject">Contract ${object.name} Expiring Soon</field>
+            <field name="email_to">${object.email}</field>
+            <field name="model_id" ref="AMC _managements.model_contract_management"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div>
+                    Dear ${object.customer_name},
+                    <br/><br/>
+                    This is a reminder that your contract "${object.name}" is expiring on ${object.end_date}.
+                    <br/><br/>
+                    Please take the necessary actions to renew or extend the contract.
+                    <br/><br/>
+                    Thank you for your business.
+                    <br/><br/>
+                    Best regards,
+                    <br/>
+                    ${user.company_id.name}
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Contract Management Tree View -->
+        <record id="contract_management_tree_view" model="ir.ui.view">
+            <field name="name">contract.management.tree</field>
+            <field name="model">contract.management</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="customer_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="email"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Contract Management Form View -->
+        <record id="contract_management_form_view" model="ir.ui.view">
+            <field name="name">contract.management.form</field>
+            <field name="model">contract.management</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="send_email_reminder" type="object" string="Send Email" attrs="{'invisible': [('status', '!=', 'expiring_soon')]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="customer_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="email"/>
+                            <field name="status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Contract Management Action Window -->
+        <record id="contract_management_action" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="res_model">contract.management</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Contract Management Menu Item -->
+        <menuitem id="contract_management_menu" name="AMC Managements" action="contract_management_action" sequence="10"/>
+    </data>
+</odoo>
